@@ -27,5 +27,9 @@ https://developer.nvidia.com/embedded/downloads
 ## うまく起動しなかった場合  
 別のインストール方法を行う  
 NVIDIA SDK Managerをインストールする  
+NVIDIAのアカウント登録が必要  
 https://developer.nvidia.com/nvidia-sdk-manager  
 <br><br>
+![image](https://user-images.githubusercontent.com/95160686/196396568-59279630-50d5-4971-ab58-078150a3c313.png)
+![image](https://user-images.githubusercontent.com/95160686/196399257-533715bf-bf87-4ae7-9683-e3557f10c947.png)
+![image](https://user-images.githubusercontent.com/95160686/196400434-3b7a9392-29fb-41eb-a6b4-7a6a2ea6401b.png)
