@@ -3,7 +3,8 @@ Jetson Xavier NX Dev kit でYOLOv5をGPUで動かすまでの手順
 準備するもの　　
 - Jetson Xavier NX Developer Kit  
 - SDカード　32GB以上のもの  
-- Micro USB Type-B（2.0）とPCをつなぐデータ転送ができるタイプのケーブル　
+- Micro USB Type-B（2.0）とPCをつなぐデータ転送ができるタイプのケーブル  
+- SSD 必須
 <br>　　  
 # 1:JetsonへのOSのインストール  
 ## OSイメージのダウンロード  
@@ -24,12 +25,23 @@ https://developer.nvidia.com/embedded/downloads
 なぜだか10回中9回はうまくいかない  
 原因の可能性　　https://forums.developer.nvidia.com/t/boot-failed-with-find-partition-via-pt-failed/172663/9  
 <br>
+起動後はこちらのサイトを参考にSSDにシステムボリュームを変更する  
+[NVIDIA Jetson Xavier NXのシステムボリュームをNVMe SSDに切り替える](https://dev.classmethod.jp/articles/nvidia-jetson-xavier-nx-system-volume-migrate-to-nvme/)
 ## うまく起動しなかった場合  
 別のインストール方法を行う  
-NVIDIA SDK Managerをインストールする  
-NVIDIAのアカウント登録が必要  
+SSDに直接書き込むためSDカードは不要  
+NVIDIA SDK Managerをインストールする　（NVIDIAのアカウント登録が必要）  
 https://developer.nvidia.com/nvidia-sdk-manager  
 <br><br>
-![image](https://user-images.githubusercontent.com/95160686/196396568-59279630-50d5-4971-ab58-078150a3c313.png)
-![image](https://user-images.githubusercontent.com/95160686/196399257-533715bf-bf87-4ae7-9683-e3557f10c947.png)
-![image](https://user-images.githubusercontent.com/95160686/196400434-3b7a9392-29fb-41eb-a6b4-7a6a2ea6401b.png)
+#### インストール手順
+まず電源を入れる前にSDカードを抜きSSDを本体の裏に装着する  
+SDKManagerを起動し、本体とケーブルで接続する  
+案内に沿って最新版のイメージをインストールする　DeepStreamは任意で入れる
+![image](https://user-images.githubusercontent.com/95160686/196888194-d82529d6-d6ee-4584-8547-202fe4a380eb.png)  
+<br>
+すべてダウンロードする　JetsonSDKcomponentsにはCUDAのサンプルが入っている  
+![image](https://user-images.githubusercontent.com/95160686/196889931-89e2fd3b-3f0e-45cc-960b-68a2067e47bd.png)
+![image](https://user-images.githubusercontent.com/95160686/196890151-836eb6ec-75c1-4d64-9742-1345af89079f.png)
+![image](https://user-images.githubusercontent.com/95160686/196890718-b51e723e-2ec6-430c-ba26-bab748f7a3fe.png)
+![image](https://user-images.githubusercontent.com/95160686/196896923-a2e48a22-80db-4ecf-b42e-e444ab93c5eb.png)
+
