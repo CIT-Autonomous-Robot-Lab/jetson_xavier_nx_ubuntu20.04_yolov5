@@ -3,8 +3,7 @@ Jetson Xavier NX Dev kit でYOLOv5をGPUで動かすまでの手順
 準備するもの　　
 - Jetson Xavier NX Developer Kit  
 - SDカード　32GB以上のもの  
-- Micro USB Type-B（2.0）とPCをつなぐデータ転送ができるタイプのケーブル  
-- SSD 必須
+- Micro USB Type-B（2.0）とPCをつなぐデータ転送ができるタイプのケーブル　
 <br>　　  
 # 1:JetsonへのOSのインストール  
 ## OSイメージのダウンロード  
@@ -29,19 +28,22 @@ https://developer.nvidia.com/embedded/downloads
 [NVIDIA Jetson Xavier NXのシステムボリュームをNVMe SSDに切り替える](https://dev.classmethod.jp/articles/nvidia-jetson-xavier-nx-system-volume-migrate-to-nvme/)
 ## うまく起動しなかった場合  
 別のインストール方法を行う  
-SSDに直接書き込むためSDカードは不要  
-NVIDIA SDK Managerをインストールする　（NVIDIAのアカウント登録が必要）  
+NVIDIA SDK Managerをインストールする  
+NVIDIAのアカウント登録が必要  
 https://developer.nvidia.com/nvidia-sdk-manager  
 <br><br>
-#### インストール手順
-まず電源を入れる前にSDカードを抜きSSDを本体の裏に装着する  
-SDKManagerを起動し、本体とケーブルで接続する  
-案内に沿って最新版のイメージをインストールする　DeepStreamは任意で入れる
-![image](https://user-images.githubusercontent.com/95160686/196888194-d82529d6-d6ee-4584-8547-202fe4a380eb.png)  
-<br>
-すべてダウンロードする　JetsonSDKcomponentsにはCUDAのサンプルが入っている  
-![image](https://user-images.githubusercontent.com/95160686/196889931-89e2fd3b-3f0e-45cc-960b-68a2067e47bd.png)
-![image](https://user-images.githubusercontent.com/95160686/196890151-836eb6ec-75c1-4d64-9742-1345af89079f.png)
-![image](https://user-images.githubusercontent.com/95160686/196890718-b51e723e-2ec6-430c-ba26-bab748f7a3fe.png)
-![image](https://user-images.githubusercontent.com/95160686/196896923-a2e48a22-80db-4ecf-b42e-e444ab93c5eb.png)
+![image](https://user-images.githubusercontent.com/95160686/196400434-3b7a9392-29fb-41eb-a6b4-7a6a2ea6401b.png)
+支持に従い全部インストールする  
 
+# インストール後CUDAサンプルを用いてGPUの確認を行う
+jetsonのインストールを行うと自動でCUDAのサンプルが入っている  
+usr/local/cuda-11.4内のsamplesをホームに持ってくる
+![Screenshot from 2022-10-21 15-58-15](https://user-images.githubusercontent.com/95160686/197136458-23e3dae2-5d5e-4464-9a8a-e09c58f17c10.png)
+samples/5_Simulations 内のサンプルのどれかに入りmakeを動かそうとすると  
+libGLU.soとglu.hがないと言われることがある
+![Screenshot from 2022-10-21 15-57-29](https://user-images.githubusercontent.com/95160686/197137999-01fd46a8-bb87-4a3a-b059-61047f14645d.png)
+その場合は  
+`sudo apt install freeglut3-dev libglu1-mesa-dev`  
+これを入力してインストールを行うと無事makeが走るようになる
+参考にしたサイト　https://ksakiyama134.hatenablog.com/entry/2016/09/25/005130
+![Screenshot from 2022-10-21 16-02-00](https://user-images.githubusercontent.com/95160686/197137540-2cad5aed-ccf0-4ed8-9205-790c644cd043.png)
