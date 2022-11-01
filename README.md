@@ -66,10 +66,24 @@ Pytorchに必要なパッケージをインストールする
 <br>
 エクスポート から　インストールまで  
 <br>
-`export TORCH_INSTALL=https://developer.download.nvidia.cn/compute/redist/jp/v502/pytorch/1.13.0a0+d0d6b1f2.nv22.09`  
+`export TORCH_INSTALL=https://developer.download.nvidia.com/compute/redist/jp/v50/pytorch/torch-1.12.0a0+2c916ef.nv22.3-cp38-cp38-linux_aarch64.whl
+`  
 これはJetpack5.0.2用のコマンドで自分のバージョンに応じて`/jp/v502/`の部分を適宜変更する  
 <br>
 `export TORCH_INSTALL=path/to/1.13.0a0+d0d6b1f2.nv22.09`  
 <br>
-`python3 -m pip install --upgrade pip; python3 -m pip install aiohttp numpy=='1.19.4' scipy=='1.5.3' export "LD_LIBRARY_PATH=/usr/lib/llvm-8/lib:$LD_LIBRARY_PATH"; python3 -m pip install --upgrade protobuf; python3 -m pip install --no-cache $TORCH_INSTALL`
+`python3 -m pip install --upgrade pip; python3 -m pip install aiohttp numpy=='1.19.4' scipy=='1.5.3' export "LD_LIBRARY_PATH=/usr/lib/llvm-8/lib:$LD_LIBRARY_PATH"; python3 -m pip install --upgrade protobuf; python3 -m pip install --no-cache $TORCH_INSTALL`  
+よくわからないエラーが出ているがインストールはできる  
+<br>
+## torchvision
+また当然torchのバージョンに対応したtorchvisionをインストール必要がある  
+対応しているバージョンは各々の環境で確認が必要  
+上のコマンドで入れた人は0.13になるので以下のコマンドを順に入れる  
+`git clone --branch v0.13.0 https://github.com/pytorch/vision torchvision`  
+`cd torchvision`  
+<br>
+やり方は汚いが権限を求められてうまく進まないので/usr/lib/python3.8に与える  
+`sudo chmod 777 -R /usr/lib/python3.8`  
+`python3 setup.py install`  
+このあとものすごく時間がかかってインストールされる  
 # YOLOv5
