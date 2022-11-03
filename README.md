@@ -90,24 +90,36 @@ Pytorchに必要なパッケージをインストールする
 Pytorchとtorchvisionのインストールが終わったら  
 `pip list`　　
 で確認を行う。うまくインストールされると下のような表示になる  
-# YOLOv5
+![Screenshot from 2022-09-01 00-29-25](https://user-images.githubusercontent.com/95160686/199663841-2043d341-9a57-421b-bed4-b28527600698.png)  
+
+# YOLOv5  
 ## githubからYOLOv5のファイルをインストールする  
 `git clone https://github.com/ultralytics/yolov5`  
 `cd yolov5`  
 ## パッケージのインストール  
 次に入力するコマンドでrequirements.txtというファイル内に書かれているパッケージがインストールされるのだが、このままだと先程とは違うバージョンのtorchとTorchivsionをインストールしようとするため、requirements.txtのPytorchとTorchivsionの部分を以下のようにコメントアウトしてからコマンドを入力  
-`pip3 install -r requirements.txt`  
+![Screenshot from 2022-11-03 16-09-16](https://user-images.githubusercontent.com/95160686/199664330-38718742-8441-4567-82ff-a22c53cd250a.png)  
+
+`sudo pip3 install -r requirements.txt`  
+sudoをしっかりつけることが重要  
 `pip list`  で多くのパッケージがインストールされたのを確認する  
 <br>
 ## YOLOv5を実行  
 YOLOv5内にはもとからサンプル画像が入っているのでそちらを使って実行してみる  
 `python3 detect.py --source ./data/images/bus.jpg `  
+ここでIPythonやtqdmやseabornがないと言われた場合は  
+`sudo pip3 install ipython`  などそれぞれpipでインストールを行う  
+![Screenshot from 2022-11-03 16-20-36](https://user-images.githubusercontent.com/95160686/199666227-7784f9a9-415a-4d95-8b7a-415ee4c8b84b.png)
+
 最初の実行時には学習データのインストールがされるため少し時間がかかる  
 ここで注目してほしいのが実行画面の最初の一文の最後で  
 `CUDA:0 (GPUの名前, ~~MiB)`と出る  
 ここでCPUと出ているとうまくインストールができていないか依存関係が間違っているのでやり直す  
+![Screenshot from 2022-11-03 16-30-00](https://user-images.githubusercontent.com/95160686/199667610-5b97d9c9-3ac8-4077-99fd-929f39f57bd5.png)
+
 <br>
-うまく動くと`run`というファイルの中に結果のファイルが作成される  
+うまく動くと`runs`というファイルの中に結果のファイルがdetect~という名前が作成される  
+
 ### YOLOv5のオプションについて  
 `python3 detect.py`のあとに様々なオプションを設定することができる  
 ここでは最低限のもののみ説明する  
@@ -126,3 +138,4 @@ webカメラを接続してリアルタイムで行いたい場合は`--source 0
 簡単にいえば似ている度合いの基準を設定できて、ある程度似ているなら表示や完璧にそっくりなもののみ表示といったことができる  
 デフォルトでは0.25に設定されている  
 <br>
+以上でインストールは完了  
