@@ -10,10 +10,10 @@ Jetson Xavier NX Dev kit でYOLOv5をGPUで動かすまでの手順
 次のサイトから  
 Jetson Xavier NX Developer Kit SD Card Image  をダウンロードする  
 https://developer.nvidia.com/embedded/downloads  
-
 ここでは[JetPack 5.0.2.](https://developer.nvidia.com/jetson-nx-developer-kit-sd-card-image)をダウンロード   
   
 この一つ前のバージョンのJetPack 4.6.1. はUbuntu 18.04でJetPack 5.0.2.では Ubuntu 20.04 が起動する  
+<br>
 ![image](https://user-images.githubusercontent.com/95160686/196377663-230894f2-0d87-4f03-bd37-1da613aad8b9.png)
 
 ## SDカードへの書き込み  
@@ -31,7 +31,8 @@ https://developer.nvidia.com/embedded/downloads
 NVIDIA SDK Managerをインストールする  
 NVIDIAのアカウント登録が必要  
 https://developer.nvidia.com/nvidia-sdk-manager  
-<br><br>
+<br>
+<br>
 ![image](https://user-images.githubusercontent.com/95160686/196400434-3b7a9392-29fb-41eb-a6b4-7a6a2ea6401b.png)
 指示に従い全部インストールする  
 
@@ -48,8 +49,8 @@ libGLU.soとglu.hがないと言われることがある
 ![Screenshot from 2022-10-21 16-02-00](https://user-images.githubusercontent.com/95160686/197137540-2cad5aed-ccf0-4ed8-9205-790c644cd043.png)
 参考にしたサイト　https://ksakiyama134.hatenablog.com/entry/2016/09/25/005130
 ## 実行例  
-マウスカーソルを動かして反応するか試す
-<img src="https://user-images.githubusercontent.com/95160686/197140534-812b792d-09f7-4f79-b1e8-740b9b7fcf51.png" width="400">
+マウスカーソルを動かして反応するか試す  
+<img src="https://user-images.githubusercontent.com/95160686/197140534-812b792d-09f7-4f79-b1e8-740b9b7fcf51.png" width="400">  
 <img src="https://user-images.githubusercontent.com/95160686/197140541-ba2049b6-f6ae-4aab-a2be-e25ac5200aa6.png" width="400">
 # Pytorch
 Jetsonでは通常のpipでインストールしたPytorchでは動かずうまくGPUを使うことができない  
