@@ -21,7 +21,7 @@ https://developer.nvidia.com/embedded/downloads
 書き込み終了後JetsonにSDカードを差し込み起動するか確認する　　
 <br><br><br>
 うまく起動した場合は運がいい  
-なぜだか10回中9回はうまくいかない  
+なぜだかうまくいかないことが多発している  
 原因の可能性　　https://forums.developer.nvidia.com/t/boot-failed-with-find-partition-via-pt-failed/172663/9  
 <br>
 起動後はこちらのサイトを参考にSSDにシステムボリュームを変更する  
@@ -33,7 +33,7 @@ NVIDIAのアカウント登録が必要
 https://developer.nvidia.com/nvidia-sdk-manager  
 <br><br>
 ![image](https://user-images.githubusercontent.com/95160686/196400434-3b7a9392-29fb-41eb-a6b4-7a6a2ea6401b.png)
-支持に従い全部インストールする  
+指示に従い全部インストールする  
 
 # インストール後CUDAサンプルを用いてGPUの確認を行う
 jetsonのインストールを行うと自動でCUDAのサンプルが入っている  
@@ -58,7 +58,7 @@ Jetsonでは通常のpipでインストールしたPytorchでは動かずうま�
 NVIDIA公式サイトからインストールを行う  
 https://docs.nvidia.com/deeplearning/frameworks/install-pytorch-jetson-platform/index.html  
 <br>
-以下は上記サイトから引っ張ってきただけ  
+以下は上記サイトを参考にした  
 まず`sudo apt update`を行う  
 Pytorchに必要なパッケージをインストールする  
 <br>
@@ -75,15 +75,53 @@ Pytorchに必要なパッケージをインストールする
 `python3 -m pip install --upgrade pip; python3 -m pip install aiohttp numpy=='1.19.4' scipy=='1.5.3' export "LD_LIBRARY_PATH=/usr/lib/llvm-8/lib:$LD_LIBRARY_PATH"; python3 -m pip install --upgrade protobuf; python3 -m pip install --no-cache $TORCH_INSTALL`  
 よくわからないエラーが出ているがインストールはできる  
 <br>
-## torchvision
-また当然torchのバージョンに対応したtorchvisionをインストール必要がある  
+# Torchvision
+また当然pytorchのバージョンに対応したtorchvisionをインストール必要がある  
 対応しているバージョンは各々の環境で確認が必要  
-上のコマンドで入れた人は0.13になるので以下のコマンドを順に入れる  
+上のコマンドで入れた人は0.13になるので以下のコマンドを入れる  
 `git clone --branch v0.13.0 https://github.com/pytorch/vision torchvision`  
 `cd torchvision`  
 <br>
-やり方は汚いが権限を求められてうまく進まないので/usr/lib/python3.8に与える  
+権限を求められるので/usr/lib/python3.8に与える  
 `sudo chmod 777 -R /usr/lib/python3.8`  
 `python3 setup.py install`  
-このあとものすごく時間がかかってインストールされる  
+このあとかなり時間がかかってインストールされるので待機  
+Pytorchとtorchvisionのインストールが終わったら  
+`pip list`　　
+で確認を行う。うまくインストールされると下のような表示になる  
 # YOLOv5
+## githubからYOLOv5のファイルをインストールする  
+`git clone https://github.com/ultralytics/yolov5`  
+`cd yolov5`  
+## パッケージのインストール  
+次に入力するコマンドでrequirements.txtというファイル内に書かれているパッケージがインストールされるのだが、このままだと先程とは違うバージョンのtorchとTorchivsionをインストールしようとするため、requirements.txtのPytorchとTorchivsionの部分を以下のようにコメントアウトしてからコマンドを入力  
+`pip3 install -r requirements.txt`  
+`pip list`  で多くのパッケージがインストールされたのを確認する  
+<br>
+## YOLOv5を実行  
+YOLOv5内にはもとからサンプル画像が入っているのでそちらを使って実行してみる  
+`python3 detect.py --source ./data/images/bus.jpg `  
+最初の実行時には学習データのインストールがされるため少し時間がかかる  
+ここで注目してほしいのが実行画面の最初の一文の最後で  
+`CUDA:0 (GPUの名前, ~~MiB)`と出る  
+ここでCPUと出ているとうまくインストールができていないか依存関係が間違っているのでやり直す  
+<br>
+うまく動くと`run`というファイルの中に結果のファイルが作成される  
+### YOLOv5のオプションについて  
+`python3 detect.py`のあとに様々なオプションを設定することができる  
+ここでは最低限のもののみ説明する  
+<br>
+### source  
+`--source`コマンドは画像認識するターゲット（ソース）の設定を行う先程のように画像のパスを渡したり、`ファイル名/*`を入力するとファイル内の画像すべてを選択したりできる  
+webカメラを接続してリアルタイムで行いたい場合は`--source 0`でカメラからの動画をソースに設定できる  
+もしつながらない場合は`lsusb`で番号を調べることができる  
+<br>
+### weight  
+`--weight`コマンドは使用する学習データを変更できる  
+なにも入れない状態では`--weights yolov5s.pt`というサンプルの学習データがデフォルトに設定されている  
+<br>
+### conf  
+`--conf`コマンドは尤度の設定で0.~の１未満で設定してそれ以下の場合の認識を表示しなくなる  
+簡単にいえば似ている度合いの基準を設定できて、ある程度似ているなら表示や完璧にそっくりなもののみ表示といったことができる  
+デフォルトでは0.25に設定されている  
+<br>
